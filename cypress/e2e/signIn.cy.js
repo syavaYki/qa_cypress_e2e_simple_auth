@@ -21,6 +21,10 @@ describe('Sign In page', () => {
     cy.get('#username').type('tomsmith');
     cy.get('#password').type('SuperSecretPassword!');
     cy.get('button[type="submit"]').click();
+    cy.url().should('include', '/secure');
+    cy.get('#flash')
+      .should('be.visible')
+      .and('contain.text', 'You logged into a secure area!');
   });
 
   it('Should not login with invalid credentials', () => {
